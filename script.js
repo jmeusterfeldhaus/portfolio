@@ -111,3 +111,96 @@ document.querySelectorAll('.spec-point').forEach(btn => {
     if (!isOpen) btn.classList.add('is-open');
   });
 });
+
+/* ============================================================
+   GSAP-powered scroll interactions (progressive enhancement)
+   Both effects below are purely additive — if the GSAP CDN
+   fails to load, or the user prefers reduced motion, the page
+   simply keeps its normal static/touch-swipe behavior.
+============================================================ */
+if (window.gsap && window.ScrollTrigger && !prefersReducedMotion) {
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* ---- "My Process" horizontal-scroll pin (desktop only) ----
+     Vertical scroll drives horizontal translateX on the strip
+     while the section itself stays pinned in place, the same
+     scroll-jack pattern used for the process rail on
+     danielspatzek.com. Mobile keeps the native touch-swipe strip
+     (CSS overflow-x:auto), since scroll-jacking fights touch
+     gestures on phones. */
+  const processSection = document.querySelector('.process');
+  const processStrip = document.querySelector('.process-strip');
+
+  function initProcessPin(){
+    if (!processSection || !processStrip) return;
+
+    ScrollTrigger.matchMedia({
+      '(min-width: 861px)': function () {
+        processStrip.classList.add('gsap-active');
+        gsap.set(processStrip, { x: 0 });
+
+        const getDistance = () => Math.max(0, processStrip.scrollWidth - processSection.clientWidth + 1);
+
+        const tween = gsap.to(processStrip, {
+          x: () => -getDistance(),
+          ease: 'none',
+          scrollTrigger: {
+            trigger: processSection,
+            start: 'top top',
+            end: () => '+=' + getDistance(),
+            scrub: 0.6,
+            pin: true,
+            invalidateOnRefresh: true,
+          }
+        });
+
+        // Cleanup when leaving this breakpoint (ScrollTrigger.matchMedia
+        // calls this automatically) — hand control back to native scroll.
+        return () => {
+          tween.scrollTrigger && tween.scrollTrigger.kill();
+          tween.kill();
+          processStrip.classList.remove('gsap-active');
+          gsap.set(processStrip, { clearProps: 'transform' });
+        };
+      }
+    });
+  }
+
+  // Wait for the strip's images to load so scrollWidth is measured
+  // accurately before the pin distance is calculated.
+  const processImages = processStrip ? Array.from(processStrip.querySelectorAll('img')) : [];
+  Promise.all(processImages.map(img => img.complete
+    ? Promise.resolve()
+    : new Promise(res => { img.onload = img.onerror = res; })
+  )).then(() => {
+    initProcessPin();
+    ScrollTrigger.refresh();
+  });
+
+  /* ---- Zoom-through transition (Work → Spec Sheet) ----
+     A small bordered "viewfinder" frame scales up while pinned
+     until it fills the viewport and fades to the ink background
+     color, seamlessly revealing the dark Spec Sheet section next —
+     the same "zoom into the screen" idea as the TV transition on
+     danielspatzek.com, built with this site's own HUD language. */
+  const zoomSection = document.querySelector('.zoom');
+  if (zoomSection) {
+    const frame = zoomSection.querySelector('.zoom-frame');
+    const caption = zoomSection.querySelector('.zoom-caption');
+    const crosshairs = Array.from(zoomSection.querySelectorAll('.crosshair'));
+    const fade = zoomSection.querySelector('.zoom-fade');
+
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: zoomSection,
+        start: 'top top',
+        end: '+=160%',
+        scrub: 0.6,
+        pin: true,
+      }
+    })
+    .to(frame, { scale: 18, borderRadius: 0, borderWidth: 0, ease: 'power1.in' }, 0)
+    .to([caption, ...crosshairs], { opacity: 0, duration: 0.15 }, 0.05)
+    .to(fade, { opacity: 1, ease: 'none' }, 0.55);
+  }
+}

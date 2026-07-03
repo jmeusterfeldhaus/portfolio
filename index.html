@@ -18,6 +18,12 @@
      see the "FONT CONTROL PANEL" at the top of style.css. -->
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@400;600;700;900&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Archivo+Black&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Anton&family=Work+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<!-- GSAP + ScrollTrigger power the horizontal-scroll Process strip and the
+     zoom-through transition below. Both are progressive enhancements —
+     script.js checks they loaded before using them, so the page still
+     works fine if this CDN is ever unreachable. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
 <body>
 
@@ -274,6 +280,28 @@
       </div>
     </div>
   </article>
+</section>
+
+<!-- ============ ZOOM TRANSITION — Work → Spec Sheet ============
+  Pinned section: the viewfinder frame scales up as you scroll until it
+  fills the screen and fades to ink, seamlessly revealing the (dark)
+  Spec Sheet section beneath it. Pure CSS transform + GSAP scrub, no
+  video trickery. Progressive enhancement — see script.js. If GSAP
+  doesn't load this just renders as a static framed detail shot.
+============================================================ -->
+<section class="zoom" id="zoom" aria-hidden="true">
+  <div class="zoom-frame">
+    <span class="crosshair crosshair-tl"></span>
+    <span class="crosshair crosshair-tr"></span>
+    <span class="crosshair crosshair-bl"></span>
+    <span class="crosshair crosshair-br"></span>
+    <div class="zoom-screen">
+      <img src="assets/hero/zoom-detail.jpg" alt="" class="zoom-screen-img">
+      <div class="zoom-scan"></div>
+    </div>
+    <span class="zoom-caption">SCANNING SPEC SHEET…</span>
+  </div>
+  <div class="zoom-fade"></div>
 </section>
 
 <!-- ============ SKILLS / SPEC SHEET ============ -->
