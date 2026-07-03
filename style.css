@@ -312,11 +312,34 @@ section{ padding:clamp(4rem,9vw,7rem) var(--edge); position:relative; }
    filename) or point an <img src> at a different file. Add/remove a
    whole <figure class="process-card"> block to change the step count. */
 
-.work{ background:var(--snow); }
+.work{ position:relative; background:var(--ink); overflow:hidden; }
+
+/* Pinned jacket backdrop — sticky + negative margin so it stays fixed
+   in the viewport behind the project list as the section scrolls past
+   it, the same "photo stays put, list scrolls over it" idea used for
+   the Work section on danielspatzek.com. Pure CSS, no JS needed to
+   hold it in place; script.js only touches the hue-rotate filter. */
+.work-bg{
+  position:sticky; top:0; left:0; height:100vh;
+  margin-bottom:-100vh; z-index:0; overflow:hidden; pointer-events:none;
+}
+.work-bg-img{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  object-position:center 20%; opacity:0.85;
+  filter:hue-rotate(0deg) saturate(1);
+  transition:filter 0.8s cubic-bezier(.2,.8,.2,1);
+}
+.work-bg-scrim{
+  position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(11,13,16,0.35) 0%, rgba(11,13,16,0.65) 45%, rgba(11,13,16,0.94) 100%);
+}
+
+.section-head, .project{ position:relative; z-index:1; }
+
 .project{
   display:grid; grid-template-columns:1.3fr 1fr; gap:clamp(1.6rem,4vw,3.5rem);
   align-items:center; padding:clamp(2.4rem,5vw,4rem) 0;
-  border-top:1px solid #dfe2e5; position:relative;
+  border-top:1px solid rgba(244,246,248,0.14);
 }
 .project-reverse{ direction:rtl; }
 .project-reverse > *{ direction:ltr; }
@@ -329,7 +352,7 @@ section{ padding:clamp(4rem,9vw,7rem) var(--edge); position:relative; }
   position:absolute; top:-0.28em; left:0; z-index:0;
   font-family:var(--font-display); font-weight:900;
   font-size:clamp(6rem,17vw,13.5rem); line-height:1; letter-spacing:-0.04em;
-  color:var(--ink); opacity:0.045; pointer-events:none;
+  color:var(--snow); opacity:0.07; pointer-events:none;
 }
 .project-reverse::before{ left:auto; right:0; }
 .project-media, .project-info{ position:relative; z-index:1; }
@@ -372,18 +395,20 @@ section{ padding:clamp(4rem,9vw,7rem) var(--edge); position:relative; }
   opacity:1; transform:translateX(-50%) translateY(0);
 }
 
-.project-num{ font-family:var(--font-mono); color:var(--steel); font-size:0.85rem; }
+.project-num{ font-family:var(--font-mono); color:var(--snow-dim); font-size:0.85rem; }
 .project-info h3{
   font-family:var(--font-display); font-weight:700; text-transform:uppercase;
   font-size:clamp(1.6rem,3vw,2.3rem); margin:0.3rem 0 0.4rem; line-height:1.05;
+  color:var(--snow); transition:color 0.3s ease;
 }
+.project:hover .project-info h3{ color:var(--flare); }
 .project-role{ color:var(--flare); font-size:0.82rem; letter-spacing:0.04em; margin-bottom:0.9rem; font-weight:500; }
-.project-desc{ color:#3a3f45; line-height:1.65; margin-bottom:1.2rem; max-width:46ch; }
+.project-desc{ color:var(--snow-dim); line-height:1.65; margin-bottom:1.2rem; max-width:46ch; }
 .project-tags{ display:flex; gap:0.5rem; flex-wrap:wrap; }
 .project-tags span{
   font-family:var(--font-mono); font-size:0.66rem; letter-spacing:0.06em;
-  text-transform:uppercase; border:1px solid #c7ccd1; border-radius:999px;
-  padding:0.3rem 0.7rem; color:#565c62;
+  text-transform:uppercase; border:1px solid rgba(244,246,248,0.3); border-radius:999px;
+  padding:0.3rem 0.7rem; color:var(--snow-dim);
 }
 
 /* ============================================================
@@ -403,6 +428,7 @@ section{ padding:clamp(4rem,9vw,7rem) var(--edge); position:relative; }
 }
 .zoom-screen{ position:absolute; inset:0; }
 .zoom-screen-img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; }
+.zoom-screen-open{ opacity:0; }
 .zoom-scan{
   position:absolute; inset:0;
   background:linear-gradient(180deg, transparent 0%, rgba(63,212,255,0.08) 50%, transparent 100%);

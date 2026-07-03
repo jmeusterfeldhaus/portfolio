@@ -197,9 +197,18 @@
 
 <!-- ============ WORK ============ -->
 <section class="work" id="work">
+  <!-- Pinned photo backdrop: the jacket stays fixed behind the project
+       list as it scrolls (sticky + negative margin trick), recolors on
+       hover per project (see script.js), then "opens" into its lining
+       in the zoom section right after. -->
+  <div class="work-bg" aria-hidden="true">
+    <img class="work-bg-img" src="assets/hero/jacket-front.jpg" alt="">
+    <div class="work-bg-scrim"></div>
+  </div>
+
   <div class="section-head">
     <p class="tag-label">03 · Selected Work</p>
-    <h2 class="section-title reveal-up">Product built for the mountain.</h2>
+    <h2 class="section-title reveal-up light">Product built for the mountain.</h2>
   </div>
 
   <!-- ---- PROJECT 1 ---- -->
@@ -296,10 +305,11 @@
     <span class="crosshair crosshair-bl"></span>
     <span class="crosshair crosshair-br"></span>
     <div class="zoom-screen">
-      <img src="assets/hero/zoom-detail.jpg" alt="" class="zoom-screen-img">
+      <img src="assets/hero/jacket-front.jpg" alt="" class="zoom-screen-img zoom-screen-closed">
+      <img src="assets/hero/jacket-interior.jpg" alt="" class="zoom-screen-img zoom-screen-open">
       <div class="zoom-scan"></div>
     </div>
-    <span class="zoom-caption">SCANNING SPEC SHEET…</span>
+    <span class="zoom-caption">OPENING THE SHELL…</span>
   </div>
   <div class="zoom-fade"></div>
 </section>

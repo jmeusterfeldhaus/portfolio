@@ -103,6 +103,31 @@ if (canvas && !prefersReducedMotion){
   window.addEventListener('resize', () => { init(); }, { passive: true });
 }
 
+/* ---------------- Work section: jacket recolors on title hover ----------------
+   The jacket photo pinned behind the project list (see .work-bg in the CSS)
+   shifts color per project via hue-rotate, echoing the hover-swap background
+   trick used for the work list on danielspatzek.com. Plain CSS transition
+   does the animating — this just sets the filter per project on hover. */
+const workBgImg = document.querySelector('.work-bg-img');
+const projectHue = { '1': 0, '2': -75, '3': 150 };
+if (workBgImg){
+  document.querySelectorAll('.project').forEach(project => {
+    const hue = projectHue[project.dataset.project] ?? 0;
+    project.addEventListener('mouseenter', () => {
+      workBgImg.style.filter = `hue-rotate(${hue}deg) saturate(1.4)`;
+    });
+    project.addEventListener('mouseleave', () => {
+      workBgImg.style.filter = 'hue-rotate(0deg) saturate(1)';
+    });
+    project.addEventListener('focusin', () => {
+      workBgImg.style.filter = `hue-rotate(${hue}deg) saturate(1.4)`;
+    });
+    project.addEventListener('focusout', () => {
+      workBgImg.style.filter = 'hue-rotate(0deg) saturate(1)';
+    });
+  });
+}
+
 /* ---------------- Spec HUD: tap-to-toggle on touch devices ---------------- */
 document.querySelectorAll('.spec-point').forEach(btn => {
   btn.addEventListener('click', (e) => {
@@ -178,17 +203,20 @@ if (window.gsap && window.ScrollTrigger && !prefersReducedMotion) {
   });
 
   /* ---- Zoom-through transition (Work → Spec Sheet) ----
-     A small bordered "viewfinder" frame scales up while pinned
-     until it fills the viewport and fades to the ink background
-     color, seamlessly revealing the dark Spec Sheet section next —
-     the same "zoom into the screen" idea as the TV transition on
-     danielspatzek.com, built with this site's own HUD language. */
+     A small bordered "viewfinder" frame scales up while pinned until
+     it fills the viewport and fades to the ink background color,
+     seamlessly revealing the dark Spec Sheet section next — the same
+     "zoom into the screen" idea as the TV transition on
+     danielspatzek.com. While it scales, the closed jacket shot
+     crossfades to the open interior/lining shot, so the jacket visibly
+     "opens" as you zoom into it. */
   const zoomSection = document.querySelector('.zoom');
   if (zoomSection) {
     const frame = zoomSection.querySelector('.zoom-frame');
     const caption = zoomSection.querySelector('.zoom-caption');
     const crosshairs = Array.from(zoomSection.querySelectorAll('.crosshair'));
     const fade = zoomSection.querySelector('.zoom-fade');
+    const openShot = zoomSection.querySelector('.zoom-screen-open');
 
     gsap.timeline({
       scrollTrigger: {
@@ -201,7 +229,8 @@ if (window.gsap && window.ScrollTrigger && !prefersReducedMotion) {
     })
     .to(frame, { scale: 18, borderRadius: 0, borderWidth: 0, ease: 'power1.in' }, 0)
     .to([caption, ...crosshairs], { opacity: 0, duration: 0.15 }, 0.05)
-    .to(fade, { opacity: 1, ease: 'none' }, 0.55);
+    .to(openShot, { opacity: 1, ease: 'none' }, 0.28)
+    .to(fade, { opacity: 1, ease: 'none' }, 0.6);
   }
 }
 
