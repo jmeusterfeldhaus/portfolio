@@ -286,6 +286,12 @@ section{ padding:clamp(4rem,9vw,7rem) var(--edge); position:relative; }
 .process-strip.gsap-active{
   overflow:visible; scroll-snap-type:none; will-change:transform;
 }
+/* Cards grow while pinned so there's real horizontal distance to travel —
+   at 300px (the touch-swipe size) desktop viewports barely overflow,
+   making the scroll-jack barely noticeable. */
+.process-strip.gsap-active .process-card{
+  width:min(52vw, 460px);
+}
 .process-strip::-webkit-scrollbar{ height:6px; }
 .process-strip::-webkit-scrollbar-thumb{ background:#d6dadd; border-radius:4px; }
 .process-card{
