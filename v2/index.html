@@ -23,7 +23,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,600;0,900;1,600;1,800;1,900&family=Anton&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Archivo:wght@500;700;800;900&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -125,16 +125,12 @@
 
 <!-- ============ WORK ============ -->
 <section class="work" id="work">
-  <div class="work-bg" aria-hidden="true">
-    <img class="work-bg-img" src="assets/hero/jacket-front.jpg" alt="">
-    <div class="work-bg-scrim"></div>
-  </div>
-
   <div class="section-head">
     <p class="tag-label">Selected Work</p>
     <h2 class="section-title reveal-up light">Product built for the mountain.</h2>
   </div>
 
+  <div class="work-body">
   <ul class="work-list">
     <li class="work-row" data-project="1">
       <button class="work-row-toggle" aria-expanded="false">
@@ -214,6 +210,17 @@
       </div>
     </li>
   </ul>
+
+  <div class="work-tv" aria-hidden="true">
+    <img class="work-tv-bg" src="assets/work/work-tv-scene.jpg" alt="">
+    <div class="work-tv-screen">
+      <img class="work-tv-frame is-active" data-project="1" src="assets/projects/project-1.jpg" alt="">
+      <img class="work-tv-frame" data-project="2" src="assets/projects/project-2.jpg" alt="">
+      <img class="work-tv-frame" data-project="3" src="assets/projects/project-3.jpg" alt="">
+      <div class="work-tv-scan"></div>
+    </div>
+  </div>
+  </div>
 
   <!-- Mid-list CTA break, the same "you like what you see? let's talk" beat
        the reference site drops partway through its Work list. -->

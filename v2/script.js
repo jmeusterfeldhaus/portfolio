@@ -65,28 +65,24 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-/* ---------------- Work list: jacket recolors on row hover ----------------
-   The jacket photo pinned behind the row list (see .work-bg in the CSS)
-   shifts tone per project via a subtle hue-rotate, echoing the reference
-   site's hover-swap background trick for its work list. */
-const workBgImg = document.querySelector('.work-bg-img');
-const projectHue = { '1': 0, '2': -35, '3': 60 };
-if (workBgImg){
+/* ---------------- Work list: TV screen crossfades on row hover ----------------
+   The framed device sitting in the roadside illustration (see .work-tv in the
+   CSS) swaps its screen content to the hovered project's photo, echoing the
+   reference site's hover-swap preview for its work list. Falls back to
+   showing project 1 (already marked is-active in the HTML) when nothing is
+   hovered/focused. */
+const tvFrames = document.querySelectorAll('.work-tv-frame');
+if (tvFrames.length){
+  const showFrame = (project) => {
+    tvFrames.forEach(f => f.classList.toggle('is-active', f.dataset.project === project));
+  };
   document.querySelectorAll('.work-row').forEach(row => {
-    const hue = projectHue[row.dataset.project] ?? 0;
-    row.addEventListener('mouseenter', () => {
-      workBgImg.style.filter = `sepia(0.25) hue-rotate(${hue}deg) saturate(1.5)`;
-    });
-    row.addEventListener('mouseleave', () => {
-      workBgImg.style.filter = 'sepia(0.25) hue-rotate(0deg) saturate(1.3)';
-    });
-    row.addEventListener('focusin', () => {
-      workBgImg.style.filter = `sepia(0.25) hue-rotate(${hue}deg) saturate(1.5)`;
-    });
-    row.addEventListener('focusout', () => {
-      workBgImg.style.filter = 'sepia(0.25) hue-rotate(0deg) saturate(1.3)';
-    });
+    const project = row.dataset.project;
+    row.addEventListener('mouseenter', () => showFrame(project));
+    row.addEventListener('focusin', () => showFrame(project));
   });
+  const workList = document.querySelector('.work-list');
+  workList?.addEventListener('mouseleave', () => showFrame('1'));
 }
 
 /* ---------------- Work list: click a row to expand its detail ---------------- */
