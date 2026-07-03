@@ -74,6 +74,26 @@ button{ font:inherit; background:none; border:none; cursor:pointer; color:inheri
 }
 
 /* ============================================================
+   LOADING SCREEN — brief full-screen intro, fades once the page
+   has loaded (see script.js). Skipped for reduced-motion users.
+============================================================ */
+.loader{
+  position:fixed; inset:0; z-index:2000; background:var(--ink);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1rem;
+  transition:opacity 0.6s ease, visibility 0.6s ease;
+}
+.loader-mark{ font-family:var(--font-display); font-weight:700; font-size:2rem; color:var(--snow); }
+.loader-mark span{ color:var(--flare); }
+.loader-text{
+  font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.2em;
+  text-transform:uppercase; color:var(--steel);
+}
+.loader.is-hidden{ opacity:0; visibility:hidden; pointer-events:none; }
+@media (prefers-reduced-motion: reduce){
+  .loader{ display:none; }
+}
+
+/* ============================================================
    SCROLL PROGRESS
 ============================================================ */
 .scroll-progress{
@@ -233,6 +253,38 @@ button{ font:inherit; background:none; border:none; cursor:pointer; color:inheri
 @keyframes scrollDrop{ 0%{ transform:translateY(-14px); } 100%{ transform:translateY(38px); } }
 
 /* ============================================================
+   PRINCIPLES MARQUEE + MATERIALS TICKER
+   Two seamless-looping strips (duplicated content + translateX(-50%))
+   — the same "bold scrolling text" idea as the reference site's
+   marquee sections, written fresh for this site.
+============================================================ */
+.principles{ background:var(--ink); padding:0; overflow:hidden; }
+.marquee{
+  overflow:hidden; white-space:nowrap;
+  border-top:1px solid var(--ink-line); border-bottom:1px solid var(--ink-line);
+  padding:1.1rem 0;
+}
+.marquee-track{
+  display:inline-flex; gap:3rem; animation:marqueeScroll 32s linear infinite;
+  will-change:transform;
+}
+.marquee-track span{
+  font-family:var(--font-display); font-weight:700; text-transform:uppercase;
+  font-size:clamp(1rem,2.2vw,1.5rem); color:var(--snow-dim); letter-spacing:0.01em;
+}
+@keyframes marqueeScroll{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+
+.ticker{ overflow:hidden; white-space:nowrap; padding:0.9rem 0; }
+.ticker-track{ display:inline-flex; gap:2.4rem; animation:marqueeScroll 22s linear infinite reverse; }
+.ticker-track span{
+  font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.12em;
+  text-transform:uppercase; color:var(--steel);
+}
+
+.cta-marquee{ border:none; margin-bottom:clamp(2.4rem,5vw,4rem); }
+.cta-marquee .marquee-track span{ color:var(--flare); font-size:clamp(1.4rem,4vw,2.6rem); }
+
+/* ============================================================
    SHARED SECTION SCAFFOLDING
 ============================================================ */
 section{ padding:clamp(4rem,9vw,7rem) var(--edge); position:relative; }
@@ -250,21 +302,46 @@ section{ padding:clamp(4rem,9vw,7rem) var(--edge); position:relative; }
 .section-title.light{ color:var(--snow); }
 
 /* ============================================================
-   APPROACH
+   ABOUT — bio + philosophy, a bold stats row and credentials.
+   Everything the reference site's About section covers (personal
+   narrative + credentials) folded into one dark section.
 ============================================================ */
-.approach{ background:var(--snow); }
-.approach-grid{
+.about{ background:var(--ink); color:var(--snow); }
+.about-grid{
   display:grid; grid-template-columns:1.1fr 0.9fr; gap:clamp(2rem,5vw,5rem);
-  align-items:start;
+  align-items:start; margin-bottom:clamp(3rem,6vw,5rem);
 }
-.approach-quote{
+.about-quote{
   font-family:var(--font-display); font-weight:600; font-style:normal;
   font-size:clamp(1.5rem,3vw,2.2rem); line-height:1.35;
-  border-left:3px solid var(--flare); padding-left:1.6rem;
+  border-left:3px solid var(--flare); padding-left:1.6rem; color:var(--snow);
 }
-.approach-bio p{
-  font-size:1rem; line-height:1.75; color:#3a3f45; margin-bottom:1.1rem;
+.about-bio p{
+  font-size:1rem; line-height:1.75; color:var(--snow-dim); margin-bottom:1.1rem;
 }
+.about-bio em{ color:var(--flare); font-style:normal; }
+
+/* Bold stat row — the same "big numbers" flourish the reference
+   site uses in its About section. [ EDIT ] the values in index.html. */
+.about-stats{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(1rem,3vw,2rem);
+  border-top:1px dashed var(--ink-line); border-bottom:1px dashed var(--ink-line);
+  padding:clamp(1.6rem,3vw,2.4rem) 0; margin-bottom:clamp(2.4rem,5vw,3.5rem);
+}
+.stat-num{
+  display:block; font-family:var(--font-display); font-weight:900;
+  font-size:clamp(2.4rem,5vw,3.6rem); line-height:1; color:var(--snow); letter-spacing:-0.02em;
+}
+.stat-label{
+  display:block; margin-top:0.5rem; font-family:var(--font-mono);
+  font-size:0.7rem; letter-spacing:0.05em; text-transform:uppercase; color:var(--steel);
+}
+
+.about .timeline{ margin-top:clamp(2rem,4vw,3rem); max-width:none; }
+.about .timeline-item{ border-color:rgba(244,246,248,0.14); }
+.about .timeline-item:last-child{ border-bottom-color:rgba(244,246,248,0.14); }
+.about .timeline-body h3{ color:var(--snow); }
+.about .timeline-body p{ color:var(--snow-dim); }
 
 /* ============================================================
    WORK
@@ -302,7 +379,13 @@ section{ padding:clamp(4rem,9vw,7rem) var(--edge); position:relative; }
   background:var(--ink);
 }
 .process-card figcaption{ padding-top:0.9rem; }
-.process-num{ font-family:var(--font-mono); color:var(--flare); font-size:0.78rem; }
+/* Bigger, bolder step numerals — the same oversized-numeral cue used
+   for the reference site's numbered process steps. */
+.process-num{
+  display:block; font-family:var(--font-display); font-weight:900;
+  color:var(--flare); font-size:clamp(2.2rem,5vw,3.2rem); line-height:1;
+  margin-bottom:0.2rem; letter-spacing:-0.02em;
+}
 .process-card h3{
   font-family:var(--font-display); font-weight:700; text-transform:uppercase;
   font-size:1.15rem; margin:0.2rem 0 0.15rem;
@@ -334,28 +417,53 @@ section{ padding:clamp(4rem,9vw,7rem) var(--edge); position:relative; }
   background:linear-gradient(180deg, rgba(11,13,16,0.35) 0%, rgba(11,13,16,0.65) 45%, rgba(11,13,16,0.94) 100%);
 }
 
-.section-head, .project{ position:relative; z-index:1; }
+.section-head, .work-list{ position:relative; z-index:1; }
 
-.project{
-  display:grid; grid-template-columns:1.3fr 1fr; gap:clamp(1.6rem,4vw,3.5rem);
-  align-items:center; padding:clamp(2.4rem,5vw,4rem) 0;
-  border-top:1px solid rgba(244,246,248,0.14);
-}
-.project-reverse{ direction:rtl; }
-.project-reverse > *{ direction:ltr; }
+/* ============================================================
+   WORK LIST — big hover-preview rows. The whole row's title turns
+   flare-orange and the jacket photo behind the section recolors
+   (see script.js) on hover/focus; clicking a row expands its detail
+   accordion-style. The same "bold title list over a fixed photo"
+   idea as the reference site's Work section.
+============================================================ */
+.work-list{ border-top:1px solid rgba(244,246,248,0.14); }
+.work-row{ border-bottom:1px solid rgba(244,246,248,0.14); }
 
-/* Oversized ghost numeral behind each project row — bold, poster-style
-   layout cue borrowed from big-type reference sites. Pure CSS, driven
-   by the existing data-project attribute. */
-.project::before{
-  content:"0" attr(data-project);
-  position:absolute; top:-0.28em; left:0; z-index:0;
-  font-family:var(--font-display); font-weight:900;
-  font-size:clamp(6rem,17vw,13.5rem); line-height:1; letter-spacing:-0.04em;
-  color:var(--snow); opacity:0.07; pointer-events:none;
+.work-row-toggle{
+  display:grid; grid-template-columns:auto 1fr auto auto;
+  align-items:baseline; gap:clamp(1rem,3vw,2.4rem);
+  width:100%; text-align:left; padding:clamp(1.3rem,3vw,2.1rem) 0;
+  cursor:pointer;
 }
-.project-reverse::before{ left:auto; right:0; }
-.project-media, .project-info{ position:relative; z-index:1; }
+.work-row-num{ font-family:var(--font-mono); color:var(--snow-dim); font-size:0.9rem; }
+.work-row-title{
+  font-family:var(--font-display); font-weight:800; text-transform:uppercase;
+  font-size:clamp(1.8rem,5.2vw,3.6rem); line-height:1; letter-spacing:-0.01em;
+  color:var(--snow); transition:color 0.3s ease;
+}
+.work-row:hover .work-row-title,
+.work-row-toggle:focus-visible .work-row-title{ color:var(--flare); }
+.work-row-meta{
+  font-family:var(--font-mono); font-size:0.72rem; letter-spacing:0.05em;
+  text-transform:uppercase; color:var(--snow-dim); white-space:nowrap;
+}
+.work-row-plus{ position:relative; width:22px; height:22px; flex:0 0 auto; }
+.work-row-plus::before, .work-row-plus::after{
+  content:""; position:absolute; background:var(--snow);
+  transition:transform 0.3s ease, opacity 0.3s ease;
+}
+.work-row-plus::before{ top:50%; left:0; width:100%; height:1.5px; transform:translateY(-50%); }
+.work-row-plus::after{ left:50%; top:0; height:100%; width:1.5px; transform:translateX(-50%); }
+.work-row-toggle[aria-expanded="true"] .work-row-plus::after{ opacity:0; transform:translateX(-50%) rotate(90deg); }
+
+.work-row-detail{
+  display:grid; grid-template-columns:1fr 1fr; gap:clamp(1.6rem,4vw,3rem);
+  max-height:0; overflow:hidden;
+  transition:max-height 0.5s cubic-bezier(.2,.8,.2,1), padding-bottom 0.5s ease;
+}
+.work-row-toggle[aria-expanded="true"] + .work-row-detail{
+  max-height:640px; padding-bottom:clamp(1.6rem,3vw,2.4rem);
+}
 
 .project-media{ position:relative; aspect-ratio:4/3; border-radius:14px; overflow:hidden; background:var(--ink); }
 .project-img{
@@ -363,7 +471,7 @@ section{ padding:clamp(4rem,9vw,7rem) var(--edge); position:relative; }
   object-fit:cover; display:block;
   transition:transform 0.6s cubic-bezier(.2,.8,.2,1);
 }
-.project:hover .project-img{ transform:scale(1.035); }
+.work-row:hover .project-img{ transform:scale(1.035); }
 /* Swap a project photo any time by replacing the file in /assets/projects/
    (keep the same filename) or pointing the <img src> at a new one. */
 
@@ -395,14 +503,6 @@ section{ padding:clamp(4rem,9vw,7rem) var(--edge); position:relative; }
   opacity:1; transform:translateX(-50%) translateY(0);
 }
 
-.project-num{ font-family:var(--font-mono); color:var(--snow-dim); font-size:0.85rem; }
-.project-info h3{
-  font-family:var(--font-display); font-weight:700; text-transform:uppercase;
-  font-size:clamp(1.6rem,3vw,2.3rem); margin:0.3rem 0 0.4rem; line-height:1.05;
-  color:var(--snow); transition:color 0.3s ease;
-}
-.project:hover .project-info h3{ color:var(--flare); }
-.project-role{ color:var(--flare); font-size:0.82rem; letter-spacing:0.04em; margin-bottom:0.9rem; font-weight:500; }
 .project-desc{ color:var(--snow-dim); line-height:1.65; margin-bottom:1.2rem; max-width:46ch; }
 .project-tags{ display:flex; gap:0.5rem; flex-wrap:wrap; }
 .project-tags span{
@@ -456,9 +556,8 @@ section{ padding:clamp(4rem,9vw,7rem) var(--edge); position:relative; }
 }
 
 /* ============================================================
-   SKILLS / SPEC SHEET
+   SPEC SHEET (capabilities columns) — now embedded inside About.
 ============================================================ */
-.skills{ background:var(--ink); color:var(--snow); }
 .spec-sheet{
   display:grid; grid-template-columns:repeat(3,1fr); gap:0;
   border-top:1px dashed var(--ink-line);
@@ -480,30 +579,8 @@ section{ padding:clamp(4rem,9vw,7rem) var(--edge); position:relative; }
 .spec-col li:first-child{ border-top:none; }
 
 /* ============================================================
-   LEADERSHIP
+   TIMELINE — now embedded inside About (see .about overrides above).
 ============================================================ */
-.leadership{
-  background:linear-gradient(180deg, var(--ink) 0%, #101317 100%);
-  color:var(--snow); text-align:center;
-}
-.leadership-inner{ max-width:900px; margin:0 auto; }
-.leadership .tag-label{ text-align:center; }
-.leadership-quote{
-  font-family:var(--font-display); font-weight:600;
-  font-size:clamp(1.6rem,4vw,2.8rem); line-height:1.3; margin:1rem 0 3rem;
-}
-.leadership-quote em{ color:var(--flare); font-style:normal; }
-.leadership-points{
-  display:grid; grid-template-columns:repeat(3,1fr); gap:1.6rem; text-align:left;
-}
-.leadership-points > div{ display:flex; gap:0.8rem; }
-.lp-mark{ color:var(--glacier); font-family:var(--font-mono); }
-.leadership-points p{ color:var(--snow-dim); font-size:0.92rem; line-height:1.55; }
-
-/* ============================================================
-   EXPERIENCE / TIMELINE
-============================================================ */
-.experience{ background:var(--snow); }
 .timeline{ max-width:800px; }
 .timeline-item{
   display:grid; grid-template-columns:180px 1fr; gap:2rem;
@@ -538,6 +615,11 @@ section{ padding:clamp(4rem,9vw,7rem) var(--edge); position:relative; }
 }
 .contact-links a:hover{ border-color:var(--flare); color:var(--flare); }
 .contact-foot{ color:var(--steel); font-size:0.78rem; }
+.back-to-top{
+  display:inline-block; margin-left:1rem; color:var(--steel);
+  border-bottom:1px solid transparent; transition:color 0.25s ease, border-color 0.25s ease;
+}
+.back-to-top:hover{ color:var(--flare); border-color:var(--flare); }
 
 /* ============================================================
    RESPONSIVE
@@ -551,13 +633,15 @@ section{ padding:clamp(4rem,9vw,7rem) var(--edge); position:relative; }
   .nav-links{ display:none; }
   .nav-cta{ display:none; }
   .nav-burger{ display:flex; }
-  .approach-grid, .project, .project-reverse{ grid-template-columns:1fr; direction:ltr; }
+  .about-grid, .work-row-detail{ grid-template-columns:1fr; }
+  .work-row-toggle{ grid-template-columns:auto 1fr auto; }
+  .work-row-meta{ display:none; }
+  .about-stats{ grid-template-columns:repeat(2,1fr); }
   .spec-sheet{ grid-template-columns:1fr; }
   .spec-col{ border-right:none; }
-  .leadership-points{ grid-template-columns:1fr; }
   .timeline-item{ grid-template-columns:1fr; gap:0.4rem; }
   .zoom-frame{ width:min(70vw, 460px); }
-  .project::before{ font-size:clamp(4.5rem,22vw,8rem); }
+  .marquee-track span{ font-size:1.1rem; }
 
   body.nav-open .nav-links{
     display:flex; flex-direction:column; gap:0; position:fixed;

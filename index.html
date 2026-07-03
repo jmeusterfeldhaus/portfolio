@@ -10,6 +10,13 @@
   EDIT ME: replace "YOUR NAME" everywhere in this file (search for
   it) and swap placeholder copy marked with [ EDIT ] comments.
   See README.md for the full checklist.
+
+  STRUCTURE NOTE: this layout follows the section order/rhythm of
+  danielspatzek.com (loading screen → intro w/ marquee + ticker →
+  Work as a big hover-preview list → zoom transition → About
+  w/ stats + credentials → Process → closing marquee + footer),
+  minus an FAQ section. Copy, photography and stats below are this
+  site's own placeholder content, not the reference site's.
 ============================================================ -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,6 +34,14 @@
 </head>
 <body>
 
+<!-- ============ LOADING SCREEN ============
+  Brief full-screen intro that fades out once the page has loaded —
+  see script.js. Skipped entirely for prefers-reduced-motion. -->
+<div class="loader" id="loader" aria-hidden="true">
+  <span class="loader-mark">YN<span>.</span></span>
+  <span class="loader-text">LOADING /home</span>
+</div>
+
 <!-- progress bar tied to scroll -->
 <div class="scroll-progress" id="scrollProgress"></div>
 
@@ -34,11 +49,11 @@
 <nav class="nav" id="mainNav">
   <a href="#hero" class="nav-mark">YN<span>.</span></a>
   <ul class="nav-links">
-    <li><a href="#approach">Approach</a></li>
-    <li><a href="#process">Process</a></li>
+    <li><a href="#hero">Intro</a></li>
     <li><a href="#work">Work</a></li>
-    <li><a href="#skills">Spec Sheet</a></li>
-    <li><a href="#experience">Experience</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#contact">Contact</a></li>
   </ul>
   <a href="assets/resume/resume.pdf" class="nav-cta" download>Résumé ↓</a>
   <button class="nav-burger" id="navBurger" aria-label="Open menu" aria-expanded="false">
@@ -46,7 +61,7 @@
   </button>
 </nav>
 
-<!-- ============ HERO ============ -->
+<!-- ============ HERO / INTRO ============ -->
 <section class="hero" id="hero">
 
   <!-- ============================================================
@@ -107,19 +122,200 @@
   </div>
 </section>
 
-<!-- ============ APPROACH / PHILOSOPHY ============ -->
-<section class="approach" id="approach">
-  <div class="section-head">
-    <p class="tag-label">01 · Approach</p>
+<!-- ============ PRINCIPLES MARQUEE ============
+  A repeating scroll of short, opinionated design rules — the same
+  "bold personality strip" idea as the reference site's marquee,
+  written fresh for this designer. [ EDIT ] the six lines below to
+  reflect your own real opinions/quirks. -->
+<section class="principles" id="principles" aria-hidden="true">
+  <div class="marquee">
+    <div class="marquee-track">
+      <span>Thou shalt test in real snow, not just a look book.</span>
+      <span>Thou shalt not sacrifice venting for a silhouette.</span>
+      <span>Thou shalt fit the body that actually rides.</span>
+      <span>Thou shalt not ship a seam you haven't taped yourself.</span>
+      <span>Thou shalt chase warmth-to-weight, not hype.</span>
+      <span>Thou shalt not let a mood board out-vote a wear test.</span>
+      <span>Thou shalt test in real snow, not just a look book.</span>
+      <span>Thou shalt not sacrifice venting for a silhouette.</span>
+      <span>Thou shalt fit the body that actually rides.</span>
+      <span>Thou shalt not ship a seam you haven't taped yourself.</span>
+      <span>Thou shalt chase warmth-to-weight, not hype.</span>
+      <span>Thou shalt not let a mood board out-vote a wear test.</span>
+    </div>
   </div>
-  <div class="approach-grid">
-    <p class="approach-quote reveal-up">
+  <!-- [ EDIT ] swap these for the real materials/tools/suppliers you work with -->
+  <div class="ticker">
+    <div class="ticker-track">
+      <span>GORE-TEX PRO</span><span>PRIMALOFT GOLD</span><span>YKK</span><span>SCHOELLER</span>
+      <span>POLARTEC</span><span>CORDURA</span><span>CLO 3D</span><span>BLUESIGN</span>
+      <span>GORE-TEX PRO</span><span>PRIMALOFT GOLD</span><span>YKK</span><span>SCHOELLER</span>
+      <span>POLARTEC</span><span>CORDURA</span><span>CLO 3D</span><span>BLUESIGN</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WORK ============
+  Big hover-preview list — hovering/focusing a title recolors the
+  pinned jacket photo behind the whole section; clicking a row
+  expands its detail. Same "bold list over a photo" idea as the
+  reference site's Work section. -->
+<section class="work" id="work">
+  <!-- Pinned photo backdrop: the jacket stays fixed behind the row
+       list as it scrolls (sticky + negative margin trick), recolors
+       on hover per project (see script.js), then "opens" into its
+       lining in the zoom section right after. -->
+  <div class="work-bg" aria-hidden="true">
+    <img class="work-bg-img" src="assets/hero/jacket-front.jpg" alt="">
+    <div class="work-bg-scrim"></div>
+  </div>
+
+  <div class="section-head">
+    <p class="tag-label">01 · Selected Work</p>
+    <h2 class="section-title reveal-up light">Product built for the mountain.</h2>
+  </div>
+
+  <ul class="work-list">
+    <!-- ---- PROJECT 1 ---- -->
+    <li class="work-row" data-project="1">
+      <button class="work-row-toggle" aria-expanded="false">
+        <span class="work-row-num">01</span>
+        <!-- [ EDIT ] project name -->
+        <span class="work-row-title">Alpine Shell System</span>
+        <span class="work-row-meta">FW24 · Lead Designer · O'Neill Europe</span>
+        <span class="work-row-plus" aria-hidden="true"></span>
+      </button>
+      <div class="work-row-detail">
+        <div class="project-media">
+          <!-- [ EDIT ] swap this file in /assets/projects/ (keep the filename
+               or update the src below) to replace the placeholder visual -->
+          <img class="project-img" src="assets/projects/project-1.jpg" alt="Alpine Shell System detail">
+          <div class="spec-hud">
+            <button class="spec-point" style="--x:22%; --y:30%;" data-spec="3-LAYER SHELL · 20K/20K MEMBRANE">01</button>
+            <button class="spec-point" style="--x:68%; --y:45%;" data-spec="LASER-CUT VENTS · ZERO STITCH LEAK PATH">02</button>
+            <button class="spec-point" style="--x:40%; --y:75%;" data-spec="ARTICULATED PATTERN · FULL RANGE FIT">03</button>
+          </div>
+        </div>
+        <div class="project-info">
+          <p class="project-desc">
+            <!-- [ EDIT ] 1-2 sentence project description -->
+            A modular 3-layer shell platform built around a single fit block,
+            engineered for backcountry ventilation without sacrificing storm
+            protection.
+          </p>
+          <div class="project-tags">
+            <span>GORE-TEX PRO</span><span>PATTERNMAKING</span><span>CLO 3D</span>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <!-- ---- PROJECT 2 ---- -->
+    <li class="work-row" data-project="2">
+      <button class="work-row-toggle" aria-expanded="false">
+        <span class="work-row-num">02</span>
+        <!-- [ EDIT ] project name -->
+        <span class="work-row-title">Mapped Insulation Midlayer</span>
+        <span class="work-row-meta">FW23 · Lead Designer · O'Neill Europe</span>
+        <span class="work-row-plus" aria-hidden="true"></span>
+      </button>
+      <div class="work-row-detail">
+        <div class="project-media">
+          <!-- [ EDIT ] swap this file in /assets/projects/ -->
+          <img class="project-img" src="assets/projects/project-2.jpg" alt="Mapped Insulation Midlayer detail">
+          <div class="spec-hud">
+            <button class="spec-point" style="--x:30%; --y:25%;" data-spec="PRIMALOFT GOLD · MAPPED INSULATION ZONES">01</button>
+            <button class="spec-point" style="--x:60%; --y:60%;" data-spec="BONDED SEAMS · NO COLD SPOTS">02</button>
+          </div>
+        </div>
+        <div class="project-info">
+          <p class="project-desc">
+            <!-- [ EDIT ] description -->
+            Zone-mapped insulation that puts warmth exactly where riders lose
+            heat fastest, and cuts it everywhere they don't.
+          </p>
+          <div class="project-tags">
+            <span>THERMAL MAPPING</span><span>SUSTAINABLE INSULATION</span><span>TECH PACK</span>
+          </div>
+        </div>
+      </div>
+    </li>
+
+    <!-- ---- PROJECT 3 ---- -->
+    <li class="work-row" data-project="3">
+      <button class="work-row-toggle" aria-expanded="false">
+        <span class="work-row-num">03</span>
+        <!-- [ EDIT ] project name -->
+        <span class="work-row-title">Next-Gen Sustainable Capsule</span>
+        <span class="work-row-meta">Cross-functional · Design Lead · O'Neill Europe</span>
+        <span class="work-row-plus" aria-hidden="true"></span>
+      </button>
+      <div class="work-row-detail">
+        <div class="project-media">
+          <!-- [ EDIT ] swap this file in /assets/projects/ -->
+          <img class="project-img" src="assets/projects/project-3.jpg" alt="Next-Gen Sustainable Capsule detail">
+          <div class="spec-hud">
+            <button class="spec-point" style="--x:35%; --y:35%;" data-spec="RECYCLED FACE FABRIC · BLUESIGN APPROVED">01</button>
+            <button class="spec-point" style="--x:65%; --y:70%;" data-spec="CROSS-FUNCTIONAL LAUNCH · 4 MARKETS">02</button>
+          </div>
+        </div>
+        <div class="project-info">
+          <p class="project-desc">
+            <!-- [ EDIT ] description -->
+            Led a small design + development pod to bring a lower-impact capsule
+            from concept to sell-in in one season, coordinating design,
+            sourcing and marketing.
+          </p>
+          <div class="project-tags">
+            <span>SUSTAINABILITY</span><span>CROSS-FUNCTIONAL LEAD</span><span>SUPPLIER MGMT</span>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<!-- ============ ZOOM TRANSITION — Work → About ============
+  Pinned section: the viewfinder frame scales up as you scroll until it
+  fills the screen and fades to ink, seamlessly revealing the (dark)
+  About section beneath it — the jacket visibly "opens" into its
+  lining as it scales. Progressive enhancement — see script.js. If
+  GSAP doesn't load this just renders as a static framed detail shot.
+============================================================ -->
+<section class="zoom" id="zoom" aria-hidden="true">
+  <div class="zoom-frame">
+    <span class="crosshair crosshair-tl"></span>
+    <span class="crosshair crosshair-tr"></span>
+    <span class="crosshair crosshair-bl"></span>
+    <span class="crosshair crosshair-br"></span>
+    <div class="zoom-screen">
+      <img src="assets/hero/jacket-front.jpg" alt="" class="zoom-screen-img zoom-screen-closed">
+      <img src="assets/hero/jacket-interior.jpg" alt="" class="zoom-screen-img zoom-screen-open">
+      <div class="zoom-scan"></div>
+    </div>
+    <span class="zoom-caption">OPENING THE SHELL…</span>
+  </div>
+  <div class="zoom-fade"></div>
+</section>
+
+<!-- ============ ABOUT ============
+  Bio + philosophy, a bold stats row, capability columns and a short
+  timeline — everything the reference site's About section covers
+  (personal narrative + credentials), all in one place. -->
+<section class="about" id="about">
+  <div class="section-head">
+    <p class="tag-label light">02 · About</p>
+    <h2 class="section-title reveal-up light">A little about the process behind the process.</h2>
+  </div>
+
+  <div class="about-grid">
+    <blockquote class="about-quote reveal-up">
       <!-- [ EDIT ] your real design philosophy in your own words -->
       "Performance apparel is a promise. Every seam, every membrane, every stitch
       angle is a decision the rider is trusting with their skin — I design like
       the mountain is grading my work, because it is."
-    </p>
-    <div class="approach-bio reveal-up">
+    </blockquote>
+    <div class="about-bio reveal-up">
       <p>
         <!-- [ EDIT ] short bio paragraph -->
         I lead the menswear performance design process for O'Neill Europe's snow
@@ -132,16 +328,89 @@
         Before O'Neill I worked across
         <!-- [ EDIT ] prior brands / categories --> outerwear and technical
         sportswear, which is where I picked up the instinct for building
-        product that survives real conditions, not just a look book.
+        product that survives real conditions, not just a look book. Lately
+        I've been more focused on building the team, process and standard
+        that makes great product <em>repeatable</em> — mentoring, running
+        critique, owning supplier relationships end-to-end.
       </p>
     </div>
   </div>
+
+  <!-- [ EDIT ] swap these four numbers/labels for your own real ones -->
+  <div class="about-stats reveal-up">
+    <div class="stat"><span class="stat-num">12+</span><span class="stat-label">Years in performance design</span></div>
+    <div class="stat"><span class="stat-num">40+</span><span class="stat-label">Styles shipped to production</span></div>
+    <div class="stat"><span class="stat-num">03</span><span class="stat-label">Designers mentored end-to-end</span></div>
+    <div class="stat"><span class="stat-num">02</span><span class="stat-label">Core fabric partners owned</span></div>
+  </div>
+
+  <div class="spec-sheet reveal-up">
+    <div class="spec-col">
+      <h4>Design &amp; Technical</h4>
+      <ul>
+        <li>Technical patternmaking &amp; fit</li>
+        <li>Tech pack development</li>
+        <li>CAD — Illustrator, CLO 3D</li>
+        <li>Trend forecasting &amp; concept</li>
+      </ul>
+    </div>
+    <div class="spec-col">
+      <h4>Materials &amp; Innovation</h4>
+      <ul>
+        <li>Waterproof / breathable systems</li>
+        <li>Insulation mapping</li>
+        <li>Sustainable &amp; bluesign fabrics</li>
+        <li>Seam &amp; bonding technology</li>
+      </ul>
+    </div>
+    <div class="spec-col">
+      <h4>Leadership</h4>
+      <ul>
+        <li>Mentoring junior &amp; mid designers</li>
+        <li>Cross-functional collection leadership</li>
+        <li>Supplier &amp; factory partnership</li>
+        <li>Design critique &amp; team direction</li>
+      </ul>
+    </div>
+  </div>
+
+  <ol class="timeline">
+    <li class="timeline-item reveal-up">
+      <div class="timeline-date">2022 — Present</div>
+      <div class="timeline-body">
+        <h3>Senior Performance Designer, Menswear Snow</h3>
+        <p>O'Neill Europe</p>
+      </div>
+    </li>
+    <li class="timeline-item reveal-up">
+      <!-- [ EDIT ] add / adjust roles -->
+      <div class="timeline-date">2019 — 2022</div>
+      <div class="timeline-body">
+        <h3>Senior Designer, Outerwear</h3>
+        <p>PREVIOUS COMPANY</p>
+      </div>
+    </li>
+    <li class="timeline-item reveal-up">
+      <div class="timeline-date">2015 — 2019</div>
+      <div class="timeline-body">
+        <h3>Designer, Technical Apparel</h3>
+        <p>PREVIOUS COMPANY</p>
+      </div>
+    </li>
+    <li class="timeline-item reveal-up">
+      <div class="timeline-date">EDUCATION</div>
+      <div class="timeline-body">
+        <h3>YOUR DEGREE, Fashion / Apparel Design</h3>
+        <p>YOUR SCHOOL</p>
+      </div>
+    </li>
+  </ol>
 </section>
 
 <!-- ============ MY PROCESS ============ -->
 <section class="process" id="process">
   <div class="section-head">
-    <p class="tag-label">02 · My Process</p>
+    <p class="tag-label">03 · My Process</p>
     <h2 class="section-title reveal-up">From sketch to summit-tested.</h2>
   </div>
 
@@ -195,238 +464,31 @@
   </div>
 </section>
 
-<!-- ============ WORK ============ -->
-<section class="work" id="work">
-  <!-- Pinned photo backdrop: the jacket stays fixed behind the project
-       list as it scrolls (sticky + negative margin trick), recolors on
-       hover per project (see script.js), then "opens" into its lining
-       in the zoom section right after. -->
-  <div class="work-bg" aria-hidden="true">
-    <img class="work-bg-img" src="assets/hero/jacket-front.jpg" alt="">
-    <div class="work-bg-scrim"></div>
-  </div>
-
-  <div class="section-head">
-    <p class="tag-label">03 · Selected Work</p>
-    <h2 class="section-title reveal-up light">Product built for the mountain.</h2>
-  </div>
-
-  <!-- ---- PROJECT 1 ---- -->
-  <article class="project" data-project="1">
-    <div class="project-media">
-      <!-- [ EDIT ] swap this file in /assets/projects/ (keep the filename
-           or update the src below) to replace the placeholder visual -->
-      <img class="project-img" src="assets/projects/project-1.jpg" alt="Alpine Shell System detail">
-      <div class="spec-hud">
-        <button class="spec-point" style="--x:22%; --y:30%;" data-spec="3-LAYER SHELL · 20K/20K MEMBRANE">01</button>
-        <button class="spec-point" style="--x:68%; --y:45%;" data-spec="LASER-CUT VENTS · ZERO STITCH LEAK PATH">02</button>
-        <button class="spec-point" style="--x:40%; --y:75%;" data-spec="ARTICULATED PATTERN · FULL RANGE FIT">03</button>
-      </div>
-    </div>
-    <div class="project-info">
-      <span class="project-num">01</span>
-      <h3><!-- [ EDIT ] project name -->Alpine Shell System</h3>
-      <p class="project-role">Lead Designer · FW24 · O'Neill Europe</p>
-      <p class="project-desc">
-        <!-- [ EDIT ] 1-2 sentence project description -->
-        A modular 3-layer shell platform built around a single fit block,
-        engineered for backcountry ventilation without sacrificing storm
-        protection.
-      </p>
-      <div class="project-tags">
-        <span>GORE-TEX PRO</span><span>PATTERNMAKING</span><span>CLO 3D</span>
-      </div>
-    </div>
-  </article>
-
-  <!-- ---- PROJECT 2 ---- -->
-  <article class="project project-reverse" data-project="2">
-    <div class="project-media">
-      <!-- [ EDIT ] swap this file in /assets/projects/ -->
-      <img class="project-img" src="assets/projects/project-2.jpg" alt="Mapped Insulation Midlayer detail">
-      <div class="spec-hud">
-        <button class="spec-point" style="--x:30%; --y:25%;" data-spec="PRIMALOFT GOLD · MAPPED INSULATION ZONES">01</button>
-        <button class="spec-point" style="--x:60%; --y:60%;" data-spec="BONDED SEAMS · NO COLD SPOTS">02</button>
-      </div>
-    </div>
-    <div class="project-info">
-      <span class="project-num">02</span>
-      <h3><!-- [ EDIT ] project name -->Mapped Insulation Midlayer</h3>
-      <p class="project-role">Lead Designer · FW23 · O'Neill Europe</p>
-      <p class="project-desc">
-        <!-- [ EDIT ] description -->
-        Zone-mapped insulation that puts warmth exactly where riders lose
-        heat fastest, and cuts it everywhere they don't.
-      </p>
-      <div class="project-tags">
-        <span>THERMAL MAPPING</span><span>SUSTAINABLE INSULATION</span><span>TECH PACK</span>
-      </div>
-    </div>
-  </article>
-
-  <!-- ---- PROJECT 3 ---- -->
-  <article class="project" data-project="3">
-    <div class="project-media">
-      <!-- [ EDIT ] swap this file in /assets/projects/ -->
-      <img class="project-img" src="assets/projects/project-3.jpg" alt="Next-Gen Sustainable Capsule detail">
-      <div class="spec-hud">
-        <button class="spec-point" style="--x:35%; --y:35%;" data-spec="RECYCLED FACE FABRIC · BLUESIGN APPROVED">01</button>
-        <button class="spec-point" style="--x:65%; --y:70%;" data-spec="CROSS-FUNCTIONAL LAUNCH · 4 MARKETS">02</button>
-      </div>
-    </div>
-    <div class="project-info">
-      <span class="project-num">03</span>
-      <h3><!-- [ EDIT ] project name -->Next-Gen Sustainable Capsule</h3>
-      <p class="project-role">Design Lead · Cross-functional · O'Neill Europe</p>
-      <p class="project-desc">
-        <!-- [ EDIT ] description -->
-        Led a small design + development pod to bring a lower-impact capsule
-        from concept to sell-in in one season, coordinating design,
-        sourcing and marketing.
-      </p>
-      <div class="project-tags">
-        <span>SUSTAINABILITY</span><span>CROSS-FUNCTIONAL LEAD</span><span>SUPPLIER MGMT</span>
-      </div>
-    </div>
-  </article>
-</section>
-
-<!-- ============ ZOOM TRANSITION — Work → Spec Sheet ============
-  Pinned section: the viewfinder frame scales up as you scroll until it
-  fills the screen and fades to ink, seamlessly revealing the (dark)
-  Spec Sheet section beneath it. Pure CSS transform + GSAP scrub, no
-  video trickery. Progressive enhancement — see script.js. If GSAP
-  doesn't load this just renders as a static framed detail shot.
-============================================================ -->
-<section class="zoom" id="zoom" aria-hidden="true">
-  <div class="zoom-frame">
-    <span class="crosshair crosshair-tl"></span>
-    <span class="crosshair crosshair-tr"></span>
-    <span class="crosshair crosshair-bl"></span>
-    <span class="crosshair crosshair-br"></span>
-    <div class="zoom-screen">
-      <img src="assets/hero/jacket-front.jpg" alt="" class="zoom-screen-img zoom-screen-closed">
-      <img src="assets/hero/jacket-interior.jpg" alt="" class="zoom-screen-img zoom-screen-open">
-      <div class="zoom-scan"></div>
-    </div>
-    <span class="zoom-caption">OPENING THE SHELL…</span>
-  </div>
-  <div class="zoom-fade"></div>
-</section>
-
-<!-- ============ SKILLS / SPEC SHEET ============ -->
-<section class="skills" id="skills">
-  <div class="section-head">
-    <p class="tag-label light">04 · Spec Sheet</p>
-    <h2 class="section-title reveal-up light">Care instructions for hiring me.</h2>
-  </div>
-
-  <div class="spec-sheet reveal-up">
-    <div class="spec-col">
-      <h4>Design &amp; Technical</h4>
-      <ul>
-        <li>Technical patternmaking &amp; fit</li>
-        <li>Tech pack development</li>
-        <li>CAD — Illustrator, CLO 3D</li>
-        <li>Trend forecasting &amp; concept</li>
-      </ul>
-    </div>
-    <div class="spec-col">
-      <h4>Materials &amp; Innovation</h4>
-      <ul>
-        <li>Waterproof / breathable systems</li>
-        <li>Insulation mapping</li>
-        <li>Sustainable &amp; bluesign fabrics</li>
-        <li>Seam &amp; bonding technology</li>
-      </ul>
-    </div>
-    <div class="spec-col">
-      <h4>Leadership</h4>
-      <ul>
-        <li>Mentoring junior &amp; mid designers</li>
-        <li>Cross-functional collection leadership</li>
-        <li>Supplier &amp; factory partnership</li>
-        <li>Design critique &amp; team direction</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- ============ LEADERSHIP ============ -->
-<section class="leadership" id="leadership">
-  <div class="leadership-inner">
-    <p class="tag-label">05 · What's Next</p>
-    <blockquote class="leadership-quote reveal-up">
-      <!-- [ EDIT ] your leadership thesis in your own words -->
-      “I've spent this stage of my career learning what makes great product.
-      The next stage is building the team, process and standard that makes
-      great product <em>repeatable</em>.”
-    </blockquote>
-    <div class="leadership-points reveal-up">
-      <div>
-        <span class="lp-mark">→</span>
-        <p><!-- [ EDIT ] --> Mentored 3 junior designers through their first full seasonal launch.</p>
-      </div>
-      <div>
-        <span class="lp-mark">→</span>
-        <p><!-- [ EDIT ] --> Ran design critique across the menswear snow team every sprint.</p>
-      </div>
-      <div>
-        <span class="lp-mark">→</span>
-        <p><!-- [ EDIT ] --> Owned supplier relationships end-to-end for two core fabric partners.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ EXPERIENCE ============ -->
-<section class="experience" id="experience">
-  <div class="section-head">
-    <p class="tag-label">06 · Experience</p>
-  </div>
-  <ol class="timeline">
-    <li class="timeline-item reveal-up">
-      <div class="timeline-date">2022 — Present</div>
-      <div class="timeline-body">
-        <h3>Senior Performance Designer, Menswear Snow</h3>
-        <p>O'Neill Europe</p>
-      </div>
-    </li>
-    <li class="timeline-item reveal-up">
-      <!-- [ EDIT ] add / adjust roles -->
-      <div class="timeline-date">2019 — 2022</div>
-      <div class="timeline-body">
-        <h3>Senior Designer, Outerwear</h3>
-        <p>PREVIOUS COMPANY</p>
-      </div>
-    </li>
-    <li class="timeline-item reveal-up">
-      <div class="timeline-date">2015 — 2019</div>
-      <div class="timeline-body">
-        <h3>Designer, Technical Apparel</h3>
-        <p>PREVIOUS COMPANY</p>
-      </div>
-    </li>
-    <li class="timeline-item reveal-up">
-      <div class="timeline-date">EDUCATION</div>
-      <div class="timeline-body">
-        <h3>YOUR DEGREE, Fashion / Apparel Design</h3>
-        <p>YOUR SCHOOL</p>
-      </div>
-    </li>
-  </ol>
-</section>
-
-<!-- ============ CONTACT / FOOTER ============ -->
+<!-- ============ CLOSING MARQUEE + CONTACT / FOOTER ============ -->
 <footer class="contact" id="contact">
+  <!-- [ EDIT ] your own closing line — keep it short and loud -->
+  <div class="marquee cta-marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>LET'S BUILD SOMETHING WARM —</span>
+      <span>LET'S BUILD SOMETHING THAT SURVIVES REAL WEATHER —</span>
+      <span>LET'S BUILD SOMETHING WARM —</span>
+      <span>LET'S BUILD SOMETHING THAT SURVIVES REAL WEATHER —</span>
+    </div>
+  </div>
+
   <div class="contact-inner">
     <h2 class="reveal-up">Let's build the next<br>collection together.</h2>
     <div class="contact-links reveal-up">
       <a href="mailto:your.email@example.com">your.email@example.com</a>
       <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <!-- [ EDIT ] add/remove socials as you like -->
+      <a href="#" target="_blank" rel="noopener">Instagram ↗</a>
       <a href="assets/resume/resume.pdf" download>Download Résumé ↓</a>
     </div>
-    <p class="contact-foot">© <span id="year"></span> YOUR NAME. Built for the mountain.</p>
+    <p class="contact-foot">
+      © <span id="year"></span> YOUR NAME. Built for the mountain.
+      <a href="#hero" class="back-to-top">Back to top ↑</a>
+    </p>
   </div>
 </footer>
 

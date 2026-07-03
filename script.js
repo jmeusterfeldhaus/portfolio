@@ -7,6 +7,22 @@ document.getElementById('year').textContent = new Date().getFullYear();
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+/* ---------------- Loading screen ----------------
+   Brief full-screen intro that fades once the page has finished
+   loading — skipped instantly for reduced-motion users so it never
+   blocks content. A short timeout fallback guards against a slow
+   'load' event (e.g. the hero video) holding the loader forever. */
+const loader = document.getElementById('loader');
+if (loader){
+  if (prefersReducedMotion){
+    loader.classList.add('is-hidden');
+  } else {
+    const hideLoader = () => loader.classList.add('is-hidden');
+    window.addEventListener('load', hideLoader);
+    setTimeout(hideLoader, 1800);
+  }
+}
+
 /* ---------------- Scroll progress + nav background ---------------- */
 const progressBar = document.getElementById('scrollProgress');
 const nav = document.getElementById('mainNav');
@@ -103,30 +119,41 @@ if (canvas && !prefersReducedMotion){
   window.addEventListener('resize', () => { init(); }, { passive: true });
 }
 
-/* ---------------- Work section: jacket recolors on title hover ----------------
-   The jacket photo pinned behind the project list (see .work-bg in the CSS)
+/* ---------------- Work list: jacket recolors on row hover ----------------
+   The jacket photo pinned behind the row list (see .work-bg in the CSS)
    shifts color per project via hue-rotate, echoing the hover-swap background
    trick used for the work list on danielspatzek.com. Plain CSS transition
-   does the animating — this just sets the filter per project on hover. */
+   does the animating — this just sets the filter per row on hover/focus. */
 const workBgImg = document.querySelector('.work-bg-img');
 const projectHue = { '1': 0, '2': -75, '3': 150 };
 if (workBgImg){
-  document.querySelectorAll('.project').forEach(project => {
-    const hue = projectHue[project.dataset.project] ?? 0;
-    project.addEventListener('mouseenter', () => {
+  document.querySelectorAll('.work-row').forEach(row => {
+    const hue = projectHue[row.dataset.project] ?? 0;
+    row.addEventListener('mouseenter', () => {
       workBgImg.style.filter = `hue-rotate(${hue}deg) saturate(1.4)`;
     });
-    project.addEventListener('mouseleave', () => {
+    row.addEventListener('mouseleave', () => {
       workBgImg.style.filter = 'hue-rotate(0deg) saturate(1)';
     });
-    project.addEventListener('focusin', () => {
+    row.addEventListener('focusin', () => {
       workBgImg.style.filter = `hue-rotate(${hue}deg) saturate(1.4)`;
     });
-    project.addEventListener('focusout', () => {
+    row.addEventListener('focusout', () => {
       workBgImg.style.filter = 'hue-rotate(0deg) saturate(1)';
     });
   });
 }
+
+/* ---------------- Work list: click a row to expand its detail ---------------- */
+document.querySelectorAll('.work-row-toggle').forEach(toggle => {
+  toggle.addEventListener('click', () => {
+    const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+    document.querySelectorAll('.work-row-toggle[aria-expanded="true"]').forEach(t => {
+      if (t !== toggle) t.setAttribute('aria-expanded', 'false');
+    });
+    toggle.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+  });
+});
 
 /* ---------------- Spec HUD: tap-to-toggle on touch devices ---------------- */
 document.querySelectorAll('.spec-point').forEach(btn => {
@@ -202,10 +229,10 @@ if (window.gsap && window.ScrollTrigger && !prefersReducedMotion) {
     ScrollTrigger.refresh();
   });
 
-  /* ---- Zoom-through transition (Work → Spec Sheet) ----
+  /* ---- Zoom-through transition (Work → About) ----
      A small bordered "viewfinder" frame scales up while pinned until
      it fills the viewport and fades to the ink background color,
-     seamlessly revealing the dark Spec Sheet section next — the same
+     seamlessly revealing the dark About section next — the same
      "zoom into the screen" idea as the TV transition on
      danielspatzek.com. While it scales, the closed jacket shot
      crossfades to the open interior/lining shot, so the jacket visibly
