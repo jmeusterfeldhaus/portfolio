@@ -204,3 +204,5 @@ if (window.gsap && window.ScrollTrigger && !prefersReducedMotion) {
     .to(fade, { opacity: 1, ease: 'none' }, 0.55);
   }
 }
+
+// build trigger 1783070599
