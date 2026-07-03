@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YOUR NAME — Senior Performance Designer, Menswear Snow</title>
+<meta name="description" content="Portfolio of YOUR NAME, Senior Performance Designer for men's snow apparel at O'Neill Europe.">
+
+<!-- ============================================================
+  EDIT ME: replace "YOUR NAME" everywhere in this file (search for
+  it) and swap placeholder copy marked with [ EDIT ] comments.
+  See README.md for the full checklist.
+============================================================ -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Loads all 3 curated font presets so you can switch instantly —
+     see the "FONT CONTROL PANEL" at the top of style.css. -->
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@400;600;700;900&family=Space+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Archivo+Black&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Anton&family=Work+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- progress bar tied to scroll -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- ============ NAV ============ -->
+<nav class="nav" id="mainNav">
+  <a href="#hero" class="nav-mark">YN<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#approach">Approach</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#skills">Spec Sheet</a></li>
+    <li><a href="#experience">Experience</a></li>
+  </ul>
+  <a href="assets/resume/resume.pdf" class="nav-cta" download>Résumé ↓</a>
+  <button class="nav-burger" id="navBurger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="hero">
+
+  <!-- ============================================================
+    HERO VIDEO BACKDROP. Swap the file at assets/hero/hero-reel.mp4
+    with your own reel (process footage, fabric detail, a fit
+    session — anything that loops well). A generated placeholder
+    clip + poster frame are already in there so the page never
+    looks broken. See README for details.
+  ============================================================ -->
+  <div class="hero-media" aria-hidden="true">
+    <video
+      class="hero-video"
+      src="assets/hero/hero-reel.mp4"
+      poster="assets/hero/hero-poster.jpg"
+      autoplay muted loop playsinline>
+    </video>
+    <div class="hero-media-overlay"></div>
+  </div>
+
+  <canvas id="snowCanvas" aria-hidden="true"></canvas>
+  <div class="hero-grid" aria-hidden="true"></div>
+
+  <!-- Viewfinder-style HUD floating over the video, camera/tech-pack flavored -->
+  <div class="hero-hud" aria-hidden="true">
+    <span class="crosshair crosshair-tl"></span>
+    <span class="crosshair crosshair-tr"></span>
+    <span class="crosshair crosshair-bl"></span>
+    <span class="crosshair crosshair-br"></span>
+    <span class="hud-rec"><i></i>REC</span>
+    <!-- [ EDIT ] once you add your own reel, change/remove this label -->
+    <span class="hud-file">PREVIEW REEL — swap at /assets/hero/hero-reel.mp4</span>
+    <span class="hud-tag hud-tag-1">3L SHELL // 20K-20K</span>
+    <span class="hud-tag hud-tag-2">FIT BLOCK // AM-04</span>
+  </div>
+
+  <div class="hero-content">
+    <p class="eyebrow reveal">Senior Performance Designer — Menswear / Snow</p>
+    <h1 class="hero-name">
+      <span class="reveal-line"><span class="reveal-word">YOUR</span></span>
+      <span class="reveal-line"><span class="reveal-word">NAME</span></span>
+    </h1>
+    <p class="hero-sub reveal">
+      Designing technical outerwear for <strong>O'Neill Europe</strong>.
+      <!-- [ EDIT ] years of experience + one line that captures your POV -->
+      12+ years turning fabric, fit and function into product men trust above the treeline.
+    </p>
+    <div class="hero-tags reveal">
+      <span>WATERPROOFING</span><span>·</span>
+      <span>PATTERN + FIT</span><span>·</span>
+      <span>TECH PACKS</span><span>·</span>
+      <span>TEAM LEADERSHIP</span>
+    </div>
+  </div>
+
+  <div class="scroll-cue">
+    <span>Scroll</span>
+    <div class="scroll-cue-line"><i></i></div>
+  </div>
+</section>
+
+<!-- ============ APPROACH / PHILOSOPHY ============ -->
+<section class="approach" id="approach">
+  <div class="section-head">
+    <p class="tag-label">01 · Approach</p>
+  </div>
+  <div class="approach-grid">
+    <p class="approach-quote reveal-up">
+      <!-- [ EDIT ] your real design philosophy in your own words -->
+      "Performance apparel is a promise. Every seam, every membrane, every stitch
+      angle is a decision the rider is trusting with their skin — I design like
+      the mountain is grading my work, because it is."
+    </p>
+    <div class="approach-bio reveal-up">
+      <p>
+        <!-- [ EDIT ] short bio paragraph -->
+        I lead the menswear performance design process for O'Neill Europe's snow
+        category, from initial concept sketch through fabric sourcing, fit
+        sessions and factory handoff. My focus sits at the intersection of
+        athlete-tested function and product men actually want to wear off the
+        hill.
+      </p>
+      <p>
+        Before O'Neill I worked across
+        <!-- [ EDIT ] prior brands / categories --> outerwear and technical
+        sportswear, which is where I picked up the instinct for building
+        product that survives real conditions, not just a look book.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MY PROCESS ============ -->
+<section class="process" id="process">
+  <div class="section-head">
+    <p class="tag-label">02 · My Process</p>
+    <h2 class="section-title reveal-up">From sketch to summit-tested.</h2>
+  </div>
+
+  <!-- ============================================================
+    Horizontal, swipeable strip. To swap a photo: replace the image
+    file in /assets/process/ (keep the same filename) — or point
+    the src at a new file and update the two text lines under it.
+    Add or remove a whole <figure> block to change the step count.
+  ============================================================ -->
+  <div class="process-strip">
+    <figure class="process-card reveal-up">
+      <img src="assets/process/process-1.jpg" alt="Concept sketch stage">
+      <figcaption>
+        <span class="process-num">01</span>
+        <h3>Concept Sketch</h3>
+        <p>Ideation</p>
+      </figcaption>
+    </figure>
+    <figure class="process-card reveal-up">
+      <img src="assets/process/process-2.jpg" alt="Pattern and fit development stage">
+      <figcaption>
+        <span class="process-num">02</span>
+        <h3>Pattern &amp; Fit</h3>
+        <p>Technical development</p>
+      </figcaption>
+    </figure>
+    <figure class="process-card reveal-up">
+      <img src="assets/process/process-3.jpg" alt="Fabric and trim sourcing stage">
+      <figcaption>
+        <span class="process-num">03</span>
+        <h3>Fabric &amp; Trim</h3>
+        <p>Sourcing</p>
+      </figcaption>
+    </figure>
+    <figure class="process-card reveal-up">
+      <img src="assets/process/process-4.jpg" alt="Sample and wear-testing stage">
+      <figcaption>
+        <span class="process-num">04</span>
+        <h3>Sample &amp; Test</h3>
+        <p>Wear testing</p>
+      </figcaption>
+    </figure>
+    <figure class="process-card reveal-up">
+      <img src="assets/process/process-5.jpg" alt="Final product stage">
+      <figcaption>
+        <span class="process-num">05</span>
+        <h3>Final Product</h3>
+        <p>Production</p>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ WORK ============ -->
+<section class="work" id="work">
+  <div class="section-head">
+    <p class="tag-label">03 · Selected Work</p>
+    <h2 class="section-title reveal-up">Product built for the mountain.</h2>
+  </div>
+
+  <!-- ---- PROJECT 1 ---- -->
+  <article class="project" data-project="1">
+    <div class="project-media">
+      <!-- [ EDIT ] swap this file in /assets/projects/ (keep the filename
+           or update the src below) to replace the placeholder visual -->
+      <img class="project-img" src="assets/projects/project-1.jpg" alt="Alpine Shell System detail">
+      <div class="spec-hud">
+        <button class="spec-point" style="--x:22%; --y:30%;" data-spec="3-LAYER SHELL · 20K/20K MEMBRANE">01</button>
+        <button class="spec-point" style="--x:68%; --y:45%;" data-spec="LASER-CUT VENTS · ZERO STITCH LEAK PATH">02</button>
+        <button class="spec-point" style="--x:40%; --y:75%;" data-spec="ARTICULATED PATTERN · FULL RANGE FIT">03</button>
+      </div>
+    </div>
+    <div class="project-info">
+      <span class="project-num">01</span>
+      <h3><!-- [ EDIT ] project name -->Alpine Shell System</h3>
+      <p class="project-role">Lead Designer · FW24 · O'Neill Europe</p>
+      <p class="project-desc">
+        <!-- [ EDIT ] 1-2 sentence project description -->
+        A modular 3-layer shell platform built around a single fit block,
+        engineered for backcountry ventilation without sacrificing storm
+        protection.
+      </p>
+      <div class="project-tags">
+        <span>GORE-TEX PRO</span><span>PATTERNMAKING</span><span>CLO 3D</span>
+      </div>
+    </div>
+  </article>
+
+  <!-- ---- PROJECT 2 ---- -->
+  <article class="project project-reverse" data-project="2">
+    <div class="project-media">
+      <!-- [ EDIT ] swap this file in /assets/projects/ -->
+      <img class="project-img" src="assets/projects/project-2.jpg" alt="Mapped Insulation Midlayer detail">
+      <div class="spec-hud">
+        <button class="spec-point" style="--x:30%; --y:25%;" data-spec="PRIMALOFT GOLD · MAPPED INSULATION ZONES">01</button>
+        <button class="spec-point" style="--x:60%; --y:60%;" data-spec="BONDED SEAMS · NO COLD SPOTS">02</button>
+      </div>
+    </div>
+    <div class="project-info">
+      <span class="project-num">02</span>
+      <h3><!-- [ EDIT ] project name -->Mapped Insulation Midlayer</h3>
+      <p class="project-role">Lead Designer · FW23 · O'Neill Europe</p>
+      <p class="project-desc">
+        <!-- [ EDIT ] description -->
+        Zone-mapped insulation that puts warmth exactly where riders lose
+        heat fastest, and cuts it everywhere they don't.
+      </p>
+      <div class="project-tags">
+        <span>THERMAL MAPPING</span><span>SUSTAINABLE INSULATION</span><span>TECH PACK</span>
+      </div>
+    </div>
+  </article>
+
+  <!-- ---- PROJECT 3 ---- -->
+  <article class="project" data-project="3">
+    <div class="project-media">
+      <!-- [ EDIT ] swap this file in /assets/projects/ -->
+      <img class="project-img" src="assets/projects/project-3.jpg" alt="Next-Gen Sustainable Capsule detail">
+      <div class="spec-hud">
+        <button class="spec-point" style="--x:35%; --y:35%;" data-spec="RECYCLED FACE FABRIC · BLUESIGN APPROVED">01</button>
+        <button class="spec-point" style="--x:65%; --y:70%;" data-spec="CROSS-FUNCTIONAL LAUNCH · 4 MARKETS">02</button>
+      </div>
+    </div>
+    <div class="project-info">
+      <span class="project-num">03</span>
+      <h3><!-- [ EDIT ] project name -->Next-Gen Sustainable Capsule</h3>
+      <p class="project-role">Design Lead · Cross-functional · O'Neill Europe</p>
+      <p class="project-desc">
+        <!-- [ EDIT ] description -->
+        Led a small design + development pod to bring a lower-impact capsule
+        from concept to sell-in in one season, coordinating design,
+        sourcing and marketing.
+      </p>
+      <div class="project-tags">
+        <span>SUSTAINABILITY</span><span>CROSS-FUNCTIONAL LEAD</span><span>SUPPLIER MGMT</span>
+      </div>
+    </div>
+  </article>
+</section>
+
+<!-- ============ SKILLS / SPEC SHEET ============ -->
+<section class="skills" id="skills">
+  <div class="section-head">
+    <p class="tag-label light">04 · Spec Sheet</p>
+    <h2 class="section-title reveal-up light">Care instructions for hiring me.</h2>
+  </div>
+
+  <div class="spec-sheet reveal-up">
+    <div class="spec-col">
+      <h4>Design &amp; Technical</h4>
+      <ul>
+        <li>Technical patternmaking &amp; fit</li>
+        <li>Tech pack development</li>
+        <li>CAD — Illustrator, CLO 3D</li>
+        <li>Trend forecasting &amp; concept</li>
+      </ul>
+    </div>
+    <div class="spec-col">
+      <h4>Materials &amp; Innovation</h4>
+      <ul>
+        <li>Waterproof / breathable systems</li>
+        <li>Insulation mapping</li>
+        <li>Sustainable &amp; bluesign fabrics</li>
+        <li>Seam &amp; bonding technology</li>
+      </ul>
+    </div>
+    <div class="spec-col">
+      <h4>Leadership</h4>
+      <ul>
+        <li>Mentoring junior &amp; mid designers</li>
+        <li>Cross-functional collection leadership</li>
+        <li>Supplier &amp; factory partnership</li>
+        <li>Design critique &amp; team direction</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LEADERSHIP ============ -->
+<section class="leadership" id="leadership">
+  <div class="leadership-inner">
+    <p class="tag-label">05 · What's Next</p>
+    <blockquote class="leadership-quote reveal-up">
+      <!-- [ EDIT ] your leadership thesis in your own words -->
+      “I've spent this stage of my career learning what makes great product.
+      The next stage is building the team, process and standard that makes
+      great product <em>repeatable</em>.”
+    </blockquote>
+    <div class="leadership-points reveal-up">
+      <div>
+        <span class="lp-mark">→</span>
+        <p><!-- [ EDIT ] --> Mentored 3 junior designers through their first full seasonal launch.</p>
+      </div>
+      <div>
+        <span class="lp-mark">→</span>
+        <p><!-- [ EDIT ] --> Ran design critique across the menswear snow team every sprint.</p>
+      </div>
+      <div>
+        <span class="lp-mark">→</span>
+        <p><!-- [ EDIT ] --> Owned supplier relationships end-to-end for two core fabric partners.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXPERIENCE ============ -->
+<section class="experience" id="experience">
+  <div class="section-head">
+    <p class="tag-label">06 · Experience</p>
+  </div>
+  <ol class="timeline">
+    <li class="timeline-item reveal-up">
+      <div class="timeline-date">2022 — Present</div>
+      <div class="timeline-body">
+        <h3>Senior Performance Designer, Menswear Snow</h3>
+        <p>O'Neill Europe</p>
+      </div>
+    </li>
+    <li class="timeline-item reveal-up">
+      <!-- [ EDIT ] add / adjust roles -->
+      <div class="timeline-date">2019 — 2022</div>
+      <div class="timeline-body">
+        <h3>Senior Designer, Outerwear</h3>
+        <p>PREVIOUS COMPANY</p>
+      </div>
+    </li>
+    <li class="timeline-item reveal-up">
+      <div class="timeline-date">2015 — 2019</div>
+      <div class="timeline-body">
+        <h3>Designer, Technical Apparel</h3>
+        <p>PREVIOUS COMPANY</p>
+      </div>
+    </li>
+    <li class="timeline-item reveal-up">
+      <div class="timeline-date">EDUCATION</div>
+      <div class="timeline-body">
+        <h3>YOUR DEGREE, Fashion / Apparel Design</h3>
+        <p>YOUR SCHOOL</p>
+      </div>
+    </li>
+  </ol>
+</section>
+
+<!-- ============ CONTACT / FOOTER ============ -->
+<footer class="contact" id="contact">
+  <div class="contact-inner">
+    <h2 class="reveal-up">Let's build the next<br>collection together.</h2>
+    <div class="contact-links reveal-up">
+      <a href="mailto:your.email@example.com">your.email@example.com</a>
+      <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a href="assets/resume/resume.pdf" download>Download Résumé ↓</a>
+    </div>
+    <p class="contact-foot">© <span id="year"></span> YOUR NAME. Built for the mountain.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
