@@ -235,7 +235,7 @@ section{ padding:clamp(4rem,9vw,7rem) var(--edge); position:relative; }
   text-transform:uppercase; color:var(--gold);
 }
 .cta-marquee{ border:none; margin-bottom:clamp(2.4rem,5vw,4rem); }
-.cta-marquee .marquee-track span{ color:var(--rust); font-size:clamp(1.4rem,4vw,2.6rem); -webkit-text-stroke:0; }
+.cta-marquee .marquee-track span{ color:var(--ink); opacity:0.35; font-size:clamp(1.4rem,4vw,2.6rem); -webkit-text-stroke:0; }
 
 /* ============================================================
    WORK — full-bleed cinematic jacket photo behind a huge
